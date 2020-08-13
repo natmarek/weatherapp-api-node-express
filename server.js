@@ -30,7 +30,7 @@ const timeStampCoverter = (timestamp) => {
   let date = new Date(timestamp * 1000);
   let hrs = date.getHours();
   let mins = '0' + date.getMinutes();
-  let formattedTime = hrs + ':' + mins.substr(-2) + ':';
+  let formattedTime = hrs + ':' + mins.substr(-2);
   return formattedTime;
 };
 
@@ -85,6 +85,7 @@ app.get('/krakow', async (req, res) => {
       krkInfo: apiResponseKrk.data.current.weather[0].description,
       krkSunrise: sunrise,
       krkSunset: sunset,
+      krkWindSpeed: apiResponseKrk.data.current.wind_speed,
     });
   } catch (e) {
     console.log(e);

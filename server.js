@@ -56,6 +56,10 @@ const dPlusMTimestampConverter = (timestamp) => {
   return formattedDate;
 };
 
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
 app.post('/result', async (req, res) => {
   try {
     const city = req.body.city;

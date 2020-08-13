@@ -99,16 +99,14 @@ app.get('/krakow', async (req, res) => {
     const dailyTemp = daily.map((e) => e.temp);
     let dailyDayDate = daily.map((e) => e.dt);
     let dailyDayTemp = dailyTemp.map((e) => e.day);
-    console.log(dailyDayDate[2]);
 
     res.render('krakow', {
       imgKrakow: krakowImage,
       krkTemp: apiResponseKrk.data.current.temp,
       krkIconPic: iconUrl1,
-      krkInfo: apiResponseKrk.data.current.weather[0].description,
+
       krkSunrise: sunrise,
       krkSunset: sunset,
-      dailyT: dailyDayTemp,
       datePlus2: dPlusMTimestampConverter(dailyDayDate[2]),
       datePlus3: dPlusMTimestampConverter(dailyDayDate[3]),
       datePlus4: dPlusMTimestampConverter(dailyDayDate[4]),

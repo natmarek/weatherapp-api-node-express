@@ -34,9 +34,27 @@ const timeStampCoverter = (timestamp) => {
   return formattedTime;
 };
 
-app.get('/', (req, res) => {
-  res.render('');
-});
+const dPlusMTimestampConverter = (timestamp) => {
+  let date = new Date(timestamp * 1000);
+  var months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  let day = date.getDate();
+  let month = months[date.getMonth()];
+  let formattedDate = day + ' ' + month;
+  return formattedDate;
+};
 
 app.post('/result', async (req, res) => {
   try {
@@ -77,6 +95,11 @@ app.get('/krakow', async (req, res) => {
     let timestampSunset = apiResponseKrk.data.current.sunset;
     let sunrise = timeStampCoverter(timestampSunrise);
     let sunset = timeStampCoverter(timestampSunset);
+    const daily = apiResponseKrk.data.daily;
+    const dailyTemp = daily.map((e) => e.temp);
+    let dailyDayDate = daily.map((e) => e.dt);
+    let dailyDayTemp = dailyTemp.map((e) => e.day);
+    console.log(dailyDayDate[2]);
 
     res.render('krakow', {
       imgKrakow: krakowImage,
@@ -85,7 +108,20 @@ app.get('/krakow', async (req, res) => {
       krkInfo: apiResponseKrk.data.current.weather[0].description,
       krkSunrise: sunrise,
       krkSunset: sunset,
-      krkWindSpeed: apiResponseKrk.data.current.wind_speed,
+      dailyT: dailyDayTemp,
+      datePlus2: dPlusMTimestampConverter(dailyDayDate[2]),
+      datePlus3: dPlusMTimestampConverter(dailyDayDate[3]),
+      datePlus4: dPlusMTimestampConverter(dailyDayDate[4]),
+      datePlus5: dPlusMTimestampConverter(dailyDayDate[5]),
+      datePlus6: dPlusMTimestampConverter(dailyDayDate[6]),
+      datePlus7: dPlusMTimestampConverter(dailyDayDate[7]),
+      krkTmrw: Math.round(dailyDayTemp[0]),
+      krkPlus2: Math.round(dailyDayTemp[1]),
+      krkPlus3: Math.round(dailyDayTemp[2]),
+      krkPlus4: Math.round(dailyDayTemp[3]),
+      krkPlus5: Math.round(dailyDayTemp[4]),
+      krkPlus6: Math.round(dailyDayTemp[5]),
+      krkPlus7: Math.round(dailyDayTemp[6]),
     });
   } catch (e) {
     console.log(e);

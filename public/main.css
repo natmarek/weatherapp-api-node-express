@@ -99,3 +99,22 @@ section {
   width: 150px;
   height: 100px;
 }
+
+table,
+td,
+th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  height: 50px;
+  padding: 15px;
+  text-align: left;
+}

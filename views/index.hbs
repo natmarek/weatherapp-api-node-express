@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <title>Document</title>
+</head>
+
+<body>
+    {{>nav}}
+    <div class="app">
+
+        <img src="cloud.png" alt="">
+
+        <h3> What is the weather like?</h3>
+
+
+        <form action="/result" method="POST">
+            <input text="text" placeholder="Enter city" name="city" />
+            <input text="text" placeholder="Enter country" name="country" />
+
+            <button type="submit"> Submit </button>
+        </form>
+        <section>
+            <h4>It is currently {{weather}} &#8451; in {{cityName}}, {{country}}</h4>
+            <img class="weatherImage" src="{{iconPic}}" alt="" />
+            <h4> {{info}}</h4>
+        </section>
+
+    </div>
+
+
+</body>
+
+</html>

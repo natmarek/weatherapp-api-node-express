@@ -94,23 +94,28 @@ app.get('/krakow', async (req, res) => {
     apiResponseKrk = await axios.get(weatherURLKrk);
     let krkIconCode = apiResponseKrk.data.current.weather[0].icon;
     let iconUrl1 = 'http://openweathermap.org/img/w/' + krkIconCode + '.png';
-    let timestampSunrise = apiResponseKrk.data.current.sunrise;
-    let timestampSunset = apiResponseKrk.data.current.sunset;
-    let sunrise = timeStampCoverter(timestampSunrise);
-    let sunset = timeStampCoverter(timestampSunset);
+    let sunrise = timeStampCoverter(apiResponseKrk.data.current.sunrise);
+    let sunset = timeStampCoverter(apiResponseKrk.data.current.sunset);
     const daily = apiResponseKrk.data.daily;
+
     const dailyTemp = daily.map((x) => Math.round(x.temp.day));
     let dailyDayDate = daily.map((x) => x.dt);
-    let newDay = dailyDayDate.map((x) => dPlusMTimestampConverter(x));
+    let arrImgDaily = daily.map(
+      (x) => 'http://openweathermap.org/img/wn/' + x.weather[0].icon + '.png'
+    );
+    let arrDescDaily = daily.map((x) => x.weather[0].description);
+    let arrDay = dailyDayDate.map((x) => dPlusMTimestampConverter(x));
 
     res.render('krakow', {
       imgKrakow: krakowImage,
-      krkTemp: Math.round(apiResponseKrk.data.current.temp),
-      krkIconPic: iconUrl1,
-      krkSunrise: sunrise,
-      krkSunset: sunset,
+      // krkTemp: Math.round(apiResponseKrk.data.current.temp),
+      // krkIconPic: iconUrl1,
+      // krkSunrise: sunrise,
+      // krkSunset: sunset,
+      imgDaily: arrImgDaily,
       dayTempList: dailyTemp,
-      mapDay: newDay,
+      dailyDesc: arrDescDaily,
+      mapDay: arrDay,
     });
   } catch (e) {
     console.error(e.response);

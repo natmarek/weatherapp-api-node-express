@@ -13,17 +13,20 @@
 
     <div class="app">
 
-        <img src="{{imgKrakow}}" alt="">
-
-        {{!-- <h3> Weather in Krakow</h3> --}}
-
-        <section>
+        <img src="{{imgKrakow}}" class="krakow" alt="">
+        {{!-- <section>
             <h4>It is currently {{krkTemp}} &#8451; in Krakow, Poland</h4>
             <h4>Sunrise: {{krkSunrise}} Sunset: {{krkSunset}}</h4>
-            <img class="weatherImage" src="{{krkIconPic}}" alt="" />
             <h4>{{krkDaily}}</h4>
-        </section>
+            <h4> </h4>
+        </section> --}}
         <table>
+            <thead>
+                <tr>
+                    <th colspan="8">7 day forecast</th>
+                </tr>
+            </thead>
+
             <tr>
                 {{#each mapDay}}
                 <th>{{this}}</th>
@@ -34,7 +37,16 @@
                 <th>{{this}}&#8451;</th>
                 {{/each}}
             </tr>
-
+            <tr>
+                {{#each  imgDaily}}
+                <th><img src={{this}} class="weatherImage" alt="icon"> </th>
+                {{/each}}
+            </tr>
+            <tr>
+                {{#each  dailyDesc}}
+                <th class="descripion">{{this}} </th>
+                {{/each}}
+            </tr>
 
         </table>
 

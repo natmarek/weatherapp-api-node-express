@@ -70,10 +70,6 @@ app.post('/result', async (req, res) => {
     let iconCode = apiResponse.data.weather[0].icon;
     iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
 
-    // if (city == !undefined) {
-    //   let drawer = true;
-    // }
-
     res.render('index', {
       drawer: true,
       weather: apiResponse.data.main.temp,
@@ -118,7 +114,7 @@ app.get('/krakow', async (req, res) => {
     });
   } catch (e) {
     console.error(e.response);
-    res.render('index', {
+    res.render('krakow', {
       msg: e.response.data.message,
     });
   }

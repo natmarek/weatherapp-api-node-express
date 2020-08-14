@@ -100,30 +100,18 @@ app.get('/krakow', async (req, res) => {
     let sunrise = timeStampCoverter(timestampSunrise);
     let sunset = timeStampCoverter(timestampSunset);
     const daily = apiResponseKrk.data.daily;
-    const dailyTemp = daily.map((e) => e.temp);
-    let dailyDayDate = daily.map((e) => e.dt);
-    let dailyDayTemp = dailyTemp.map((e) => e.day);
+    const dailyTemp = daily.map((x) => Math.round(x.temp.day));
+    let dailyDayDate = daily.map((x) => x.dt);
+    let newDay = dailyDayDate.map((x) => dPlusMTimestampConverter(x));
 
     res.render('krakow', {
       imgKrakow: krakowImage,
-      krkTemp: apiResponseKrk.data.current.temp,
+      krkTemp: Math.round(apiResponseKrk.data.current.temp),
       krkIconPic: iconUrl1,
-
       krkSunrise: sunrise,
       krkSunset: sunset,
-      datePlus2: dPlusMTimestampConverter(dailyDayDate[2]),
-      datePlus3: dPlusMTimestampConverter(dailyDayDate[3]),
-      datePlus4: dPlusMTimestampConverter(dailyDayDate[4]),
-      datePlus5: dPlusMTimestampConverter(dailyDayDate[5]),
-      datePlus6: dPlusMTimestampConverter(dailyDayDate[6]),
-      datePlus7: dPlusMTimestampConverter(dailyDayDate[7]),
-      krkTmrw: Math.round(dailyDayTemp[0]),
-      krkPlus2: Math.round(dailyDayTemp[1]),
-      krkPlus3: Math.round(dailyDayTemp[2]),
-      krkPlus4: Math.round(dailyDayTemp[3]),
-      krkPlus5: Math.round(dailyDayTemp[4]),
-      krkPlus6: Math.round(dailyDayTemp[5]),
-      krkPlus7: Math.round(dailyDayTemp[6]),
+      dayTempList: dailyTemp,
+      mapDay: newDay,
     });
   } catch (e) {
     console.log(e);

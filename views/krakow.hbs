@@ -25,33 +25,17 @@
         </section>
         <table>
             <tr>
-                <th>Tomorrow</th>
-                <th>{{datePlus2}}</th>
-                <th>{{datePlus3}}</th>
-                <th>{{datePlus4}}</th>
-                <th>{{datePlus5}}</th>
-                <th>{{datePlus6}}</th>
-                <th>{{datePlus7}}</th>
-
+                {{#each mapDay}}
+                <th>{{this}}</th>
+                {{/each}}
             </tr>
             <tr>
-                <th>{{krkTmrw}}&#8451;</th>
-                <th>{{krkPlus2}}&#8451;</th>
-                <th>{{krkPlus3}}&#8451;</th>
-                <th>{{krkPlus4}}&#8451;</th>
-                <th>{{krkPlus5}}&#8451;</th>
-                <th>{{krkPlus6}}&#8451; </th>
-                <th>{{krkPlus7}}&#8451; </th>
+                {{#each dayTempList}}
+                <th>{{this}}&#8451;</th>
+                {{/each}}
             </tr>
-            {{!-- <tr>
-                <th>Tomorrow</th>
-                <th>+2 days</th>
-                <th>+3 days</th>
-                <th>+4 days</th>
-                <th>+5 days</th>
-                <th>+6 days </th>
-                <th>+7 days </th>
-            </tr> --}}
+
+
 
         </table>
 

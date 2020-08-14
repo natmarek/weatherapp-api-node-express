@@ -82,7 +82,7 @@ app.post('/result', async (req, res) => {
       iconPic: iconUrl,
     });
   } catch (e) {
-    console.log('error');
+    res.send('Please enter city name and country');
   }
 });
 

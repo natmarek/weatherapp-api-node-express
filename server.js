@@ -62,6 +62,7 @@ app.get('/', (req, res) => {
 
 app.post('/result', async (req, res) => {
   try {
+    const drawer = false;
     const city = req.body.city;
     const country = req.body.country;
     const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=metric&appid=b7e53a69e8d57ee9c4e219dc0de83c6d`;
@@ -69,20 +70,22 @@ app.post('/result', async (req, res) => {
     let iconCode = apiResponse.data.weather[0].icon;
     iconUrl = 'http://openweathermap.org/img/w/' + iconCode + '.png';
 
-    if (country.length > 3) {
-      res.send(
-        'Please enter country code such as UK for united Kingdom or DE for Germany'
-      );
-    }
+    // if (city == !undefined) {
+    //   let drawer = true;
+    // }
 
     res.render('index', {
+      drawer: true,
       weather: apiResponse.data.main.temp,
       cityName: city,
       info: apiResponse.data.weather[0].description,
       iconPic: iconUrl,
     });
   } catch (e) {
-    res.send('Please enter city name and country');
+    console.error(e.response);
+    res.render('index', {
+      msg: e.response.data.message,
+    });
   }
 });
 
@@ -114,7 +117,10 @@ app.get('/krakow', async (req, res) => {
       mapDay: newDay,
     });
   } catch (e) {
-    console.log(e);
+    console.error(e.response);
+    res.render('index', {
+      msg: e.response.data.message,
+    });
   }
 });
 

@@ -24,10 +24,13 @@
             <button type="submit"> Submit </button>
         </form>
         <section>
+            {{#if drawer}}
             <h4>It is currently {{weather}} &#8451; in {{cityName}} {{country}}</h4>
             <img class="weatherImage" src="{{iconPic}}" alt="" />
             <h4> {{info}}</h4>
+            {{/if}}
         </section>
+        {{msg}}
 
     </div>
 
